@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroTrace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0fdf4;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center p-4 sm:p-8">
+
+    <!-- Header Section -->
+    <div class="flex items-center space-x-2 text-3xl font-bold text-green-700 mb-8 sm:mb-12">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+            <path d="M2 17l10 5 10-5"></path>
+            <path d="M2 12l10 5 10-5"></path>
+        </svg>
+        <h1 class="text-green-600">TraceAgro</h1>
+    </div>
+
+    <!-- Supply Chain Flow -->
+    <div class="relative flex flex-col sm:flex-row items-center justify-center w-full max-w-6xl mb-8">
+        <!-- Farmer Section -->
+        <div class="flex flex-col items-center text-center">
+            <div class="relative w-20 h-20 rounded-full bg-green-200 border-4 border-green-400 flex items-center justify-center mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 20A7 7 0 0 1 9.22 8.5L2 15l7 7h15"></path>
+                    <path d="M12 13a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"></path>
+                </svg>
+            </div>
+            <p class="font-semibold text-gray-700">Farmer</p>
+        </div>
+
+        <!-- Connector Line (for larger screens) -->
+        <div class="hidden sm:block flex-grow border-t-2 border-green-400 border-dashed mx-4"></div>
+        <!-- Connector Line (for smaller screens) -->
+        <div class="block sm:hidden h-8 border-l-2 border-green-400 border-dashed my-2"></div>
+
+        <!-- Distributor Section -->
+        <div class="flex flex-col items-center text-center">
+            <div class="relative w-20 h-20 rounded-full bg-green-200 border-4 border-green-400 flex items-center justify-center mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 20h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2z"></path>
+                    <path d="M10 17v-4a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v4"></path>
+                    <circle cx="7" cy="17" r="1"></circle>
+                    <circle cx="17" cy="17" r="1"></circle>
+                </svg>
+            </div>
+            <p class="font-semibold text-gray-700">Distributor</p>
+        </div>
+
+        <!-- Connector Line (for larger screens) -->
+        <div class="hidden sm:block flex-grow border-t-2 border-green-400 border-dashed mx-4"></div>
+        <!-- Connector Line (for smaller screens) -->
+        <div class="block sm:hidden h-8 border-l-2 border-green-400 border-dashed my-2"></div>
+
+        <!-- Retailer Section -->
+        <div class="flex flex-col items-center text-center">
+            <div class="relative w-20 h-20 rounded-full bg-green-200 border-4 border-green-400 flex items-center justify-center mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v13"></path>
+                    <path d="M12 17a2.5 2.5 0 0 0 2.5 2.5H16"></path>
+                    <path d="M15 15a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path>
+                </svg>
+            </div>
+            <p class="font-semibold text-gray-700">Retailer</p>
+        </div>
+    </div>
+
+    <!-- Data Sections -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl mb-12">
+        <!-- Farmer Data Box -->
+        <div id="farmer-box" class="bg-white rounded-xl shadow-lg p-6 sm:p-8 transform transition-all duration-300 hover:scale-105">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800 border-b-2 border-green-200 pb-2">Farmer Data</h2>
+            <div id="farmer-data-content">
+                <p id="farmer-name" class="text-gray-600 mb-1"><span class="font-medium text-gray-800">Farmer Name:</span> N/A</p>
+                <p id="product-name" class="text-gray-600 mb-1"><span class="font-medium text-gray-800">Product:</span> N/A</p>
+                <p id="location" class="text-gray-600 mb-1"><span class="font-medium text-gray-800">Location:</span> N/A</p>
+                <p id="price-farmer" class="text-gray-600 mb-1"><span class="font-medium text-gray-800">Price per kg:</span> N/A</p>
+                <p id="departure-date" class="text-gray-600"><span class="font-medium text-gray-800">Departure Date:</span> N/A</p>
+            </div>
+        </div>
+
+        <!-- Distributor Data Box -->
+        <div id="distributor-box" class="bg-white rounded-xl shadow-lg p-6 sm:p-8 transform transition-all duration-300 hover:scale-105">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800 border-b-2 border-green-200 pb-2">Distributor Data</h2>
+            <div id="distributor-data-content">
+                <p id="distributor-name" class="text-gray-600 mb-1"><span class="font-medium text-gray-800">Distributor Name:</span> N/A</p>
+                <p id="warehouse" class="text-gray-600 mb-1"><span class="font-medium text-gray-800">Warehouse:</span> N/A</p>
+                <p id="arrival-distributor" class="text-gray-600 mb-1"><span class="font-medium text-gray-800">Arrival Time (from Farmer):</span> N/A</p>
+                <p id="departure-distributor" class="text-gray-600 mb-1"><span class="font-medium text-gray-800">Departure Time (from Distributor):</span> N/A</p>
+                <p id="price-distributor" class="text-gray-600"><span class="font-medium text-gray-800">Price per kg:</span> N/A</p>
+            </div>
+        </div>
+
+        <!-- Retailer Data Box -->
+        <div id="retailer-box" class="bg-white rounded-xl shadow-lg p-6 sm:p-8 transform transition-all duration-300 hover:scale-105">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800 border-b-2 border-green-200 pb-2">Retailer Data</h2>
+            <div id="retailer-data-content">
+                <p id="retailer-name" class="text-gray-600 mb-1"><span class="font-medium text-gray-800">Retailer Name:</span> N/A</p>
+                <p id="gov-id" class="text-gray-600 mb-1"><span class="font-medium text-gray-800">Gov ID:</span> N/A</p>
+                <p id="shop-name" class="text-gray-600 mb-1"><span class="font-medium text-gray-800">Shop Name:</span> N/A</p>
+                <p id="arrival-retailer" class="text-gray-600 mb-1"><span class="font-medium text-gray-800">Arrival Time:</span> N/A</p>
+                <p id="final-price" class="text-gray-600"><span class="font-medium text-gray-800">Final Price:</span> N/A</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const defaultData = {
+                farmer: {
+                    name: 'Green Acres Farm',
+                    product: 'Organic Tomatoes',
+                    location: 'Village #123, India',
+                    price: '₹200',
+                    departure: '10-09-2025'
+                },
+                distributor: {
+                    name: 'AgriLogistics Hub',
+                    warehouse: 'Warehouse A',
+                    arrival: '10-09-2025 14:30',
+                    departure: '11-09-2025 08:00',
+                    price: '₹250'
+                },
+                retailer: {
+                    name: 'Fresh Market',
+                    govId: 'ID-123456789',
+                    shopName: 'Freshness Store',
+                    arrival: '11-09-2025 12:00',
+                    finalPrice: '₹300'
+                }
+            };
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const dataParam = urlParams.get('data');
+
+            let appData = defaultData;
+            if (dataParam) {
+                try {
+                    const decodedData = atob(dataParam);
+                    appData = JSON.parse(decodedData);
+                } catch (e) {
+                    console.error("Failed to parse data from URL:", e);
+                }
+            }
+
+            // Function to update the UI with data
+            function updateUI(data) {
+                // Farmer
+                document.getElementById('farmer-name').innerHTML = `<span class="font-medium text-gray-800">Farmer Name:</span> ${data.farmer.name}`;
+                document.getElementById('product-name').innerHTML = `<span class="font-medium text-gray-800">Product:</span> ${data.farmer.product}`;
+                document.getElementById('location').innerHTML = `<span class="font-medium text-gray-800">Location:</span> ${data.farmer.location}`;
+                document.getElementById('price-farmer').innerHTML = `<span class="font-medium text-gray-800">Price per kg:</span> ${data.farmer.price}`;
+                document.getElementById('departure-date').innerHTML = `<span class="font-medium text-gray-800">Departure Date:</span> ${data.farmer.departure}`;
+
+                // Distributor
+                document.getElementById('distributor-name').innerHTML = `<span class="font-medium text-gray-800">Distributor Name:</span> ${data.distributor.name}`;
+                document.getElementById('warehouse').innerHTML = `<span class="font-medium text-gray-800">Warehouse:</span> ${data.distributor.warehouse}`;
+                document.getElementById('arrival-distributor').innerHTML = `<span class="font-medium text-gray-800">Arrival Time (from Farmer):</span> ${data.distributor.arrival}`;
+                document.getElementById('departure-distributor').innerHTML = `<span class="font-medium text-gray-800">Departure Time (from Distributor):</span> ${data.distributor.departure}`;
+                document.getElementById('price-distributor').innerHTML = `<span class="font-medium text-gray-800">Price per kg:</span> ${data.distributor.price}`;
+
+                // Retailer
+                document.getElementById('retailer-name').innerHTML = `<span class="font-medium text-gray-800">Retailer Name:</span> ${data.retailer.name}`;
+                document.getElementById('gov-id').innerHTML = `<span class="font-medium text-gray-800">Gov ID:</span> ${data.retailer.govId}`;
+                document.getElementById('shop-name').innerHTML = `<span class="font-medium text-gray-800">Shop Name:</span> ${data.retailer.shopName}`;
+                document.getElementById('arrival-retailer').innerHTML = `<span class="font-medium text-gray-800">Arrival Time:</span> ${data.retailer.arrival}`;
+                document.getElementById('final-price').innerHTML = `<span class="font-medium text-gray-800">Final Price:</span> ${data.retailer.finalPrice}`;
+            }
+
+            // Initial UI update with either default or URL data
+            updateUI(appData);
+        });
+    </script>
+</body>
+</html>
